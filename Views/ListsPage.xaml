@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MovieListApp.ViewModels"
+             xmlns:models="clr-namespace:MovieListApp.Models"
+             x:Class="MovieListApp.Views.ListsPage"
+             x:DataType="vm:ListsViewModel"
+             Title="My Lists">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Empty state -->
+        <VerticalStackLayout IsVisible="{Binding Lists.Count, Converter={StaticResource ZeroCountConverter}}"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="8"
+                             Grid.Row="0">
+            <Label Text="No lists yet."
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource AppTextSecondary}"
+                   FontSize="16" />
+            <Label Text="Tap the button below to create your first list."
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource AppTextSecondary}"
+                   FontSize="13" />
+        </VerticalStackLayout>
+
+        <!-- List items -->
+        <CollectionView Grid.Row="0"
+                        ItemsSource="{Binding Lists}"
+                        SelectionMode="None"
+                        Margin="12,8,12,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:MovieList">
+                    <Border BackgroundColor="{StaticResource AppSurface}"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="0"
+                            Margin="0,5">
+                        <Grid ColumnDefinitions="*,Auto" Padding="16,14" ColumnSpacing="12">
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" Spacing="4">
+                                <Label Text="{Binding Name}"
+                                       FontSize="17"
+                                       FontAttributes="Bold" />
+                                <Label Text="{Binding MovieCountDisplay}"
+                                       FontSize="13"
+                                       TextColor="{StaticResource AppTextSecondary}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1"
+                                    Text="✕"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ListsViewModel}}, Path=DeleteListCommand}"
+                                    CommandParameter="{Binding .}"
+                                    VerticalOptions="Center"
+                                    FontSize="14"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{StaticResource AppTextSecondary}"
+                                    BorderWidth="0"
+                                    Padding="8"
+                                    WidthRequest="40"
+                                    HeightRequest="40" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ListsViewModel}}, Path=GoToListCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- New List button -->
+        <Button Grid.Row="1"
+                Text="+ New List"
+                Command="{Binding CreateListCommand}"
+                Margin="16,12,16,20"
+                HorizontalOptions="Fill" />
+
+    </Grid>
+</ContentPage>

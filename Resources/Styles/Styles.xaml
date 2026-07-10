@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{StaticResource AppAccent}" />
+    </Style>
+
+    <Style TargetType="IndicatorView">
+        <Setter Property="IndicatorColor"         Value="{StaticResource AppSurfaceHigh}"/>
+        <Setter Property="SelectedIndicatorColor" Value="{StaticResource AppAccent}"/>
+    </Style>
+
+    <Style TargetType="Border">
+        <Setter Property="Stroke"          Value="{StaticResource AppDividerBrush}" />
+        <Setter Property="StrokeShape"     Value="Rectangle"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+    </Style>
+
+    <Style TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{StaticResource AppDivider}" />
+    </Style>
+
+    <!-- ── Buttons ────────────────────────────────────────────── -->
+    <Style TargetType="Button">
+        <Setter Property="TextColor"           Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="BackgroundColor"     Value="{StaticResource AppAccent}" />
+        <Setter Property="FontFamily"          Value="OpenSansSemibold"/>
+        <Setter Property="FontSize"            Value="15"/>
+        <Setter Property="BorderWidth"         Value="0"/>
+        <Setter Property="CornerRadius"        Value="10"/>
+        <Setter Property="Padding"             Value="16,12"/>
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest"  Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor"       Value="{StaticResource AppTextSecondary}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource AppSurfaceHigh}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver" />
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- ── Text inputs ───────────────────────────────────────── -->
+    <Style TargetType="Editor">
+        <Setter Property="TextColor"        Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="BackgroundColor"  Value="{StaticResource AppSurface}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource AppTextSecondary}" />
+        <Setter Property="FontFamily"       Value="OpenSansRegular"/>
+        <Setter Property="FontSize"         Value="14" />
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest"  Value="44"/>
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="TextColor"        Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="BackgroundColor"  Value="{StaticResource AppSurface}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource AppTextSecondary}" />
+        <Setter Property="FontFamily"       Value="OpenSansRegular"/>
+        <Setter Property="FontSize"         Value="14" />
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest"  Value="44"/>
+    </Style>
+
+    <Style TargetType="SearchBar">
+        <Setter Property="TextColor"        Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource AppTextSecondary}" />
+        <Setter Property="CancelButtonColor" Value="{StaticResource AppTextSecondary}" />
+        <Setter Property="BackgroundColor"  Value="{StaticResource AppSurface}" />
+        <Setter Property="FontFamily"       Value="OpenSansRegular" />
+        <Setter Property="FontSize"         Value="15" />
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest"  Value="44"/>
+    </Style>
+
+    <Style TargetType="Picker">
+        <Setter Property="TextColor"       Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="TitleColor"      Value="{StaticResource AppTextSecondary}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource AppSurface}" />
+        <Setter Property="FontFamily"      Value="OpenSansRegular"/>
+        <Setter Property="FontSize"        Value="14" />
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest"  Value="44"/>
+    </Style>
+
+    <!-- ── Labels ────────────────────────────────────────────── -->
+    <Style TargetType="Label">
+        <Setter Property="TextColor"       Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily"      Value="OpenSansRegular" />
+        <Setter Property="FontSize"        Value="14" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="SectionLabel">
+        <Setter Property="TextColor"      Value="{StaticResource AppTextSecondary}" />
+        <Setter Property="FontSize"       Value="12" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="Headline">
+        <Setter Property="TextColor"         Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="FontSize"          Value="28" />
+        <Setter Property="FontAttributes"    Value="Bold"/>
+        <Setter Property="FontFamily"        Value="OpenSansSemibold"/>
+        <Setter Property="HorizontalOptions" Value="Start" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="SubHeadline">
+        <Setter Property="TextColor"      Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="FontSize"       Value="20" />
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontFamily"     Value="OpenSansSemibold"/>
+    </Style>
+
+    <!-- ── Other controls ────────────────────────────────────── -->
+    <Style TargetType="CheckBox">
+        <Setter Property="Color"               Value="{StaticResource AppAccent}" />
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest"  Value="44"/>
+    </Style>
+
+    <Style TargetType="Slider">
+        <Setter Property="MinimumTrackColor" Value="{StaticResource AppAccent}" />
+        <Setter Property="MaximumTrackColor" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="ThumbColor"        Value="{StaticResource AppAccent}" />
+    </Style>
+
+    <Style TargetType="Switch">
+        <Setter Property="OnColor"    Value="{StaticResource AppAccent}" />
+        <Setter Property="ThumbColor" Value="{StaticResource White}" />
+    </Style>
+
+    <Style TargetType="RefreshView">
+        <Setter Property="RefreshColor" Value="{StaticResource AppAccent}" />
+    </Style>
+
+    <Style TargetType="ListView">
+        <Setter Property="SeparatorColor"      Value="{StaticResource AppDivider}" />
+        <Setter Property="RefreshControlColor" Value="{StaticResource AppAccent}" />
+    </Style>
+
+    <Style TargetType="ImageButton">
+        <Setter Property="Opacity"      Value="1" />
+        <Setter Property="BorderColor"  Value="Transparent"/>
+        <Setter Property="BorderWidth"  Value="0"/>
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest"  Value="44"/>
+    </Style>
+
+    <!-- ── Shell / Navigation ─────────────────────────────────── -->
+    <Style TargetType="Page" ApplyToDerivedTypes="True">
+        <Setter Property="Padding"          Value="0"/>
+        <Setter Property="BackgroundColor"  Value="{StaticResource AppBackground}" />
+    </Style>
+
+    <Style TargetType="Shell" ApplyToDerivedTypes="True">
+        <Setter Property="Shell.BackgroundColor"       Value="{StaticResource AppSurface}" />
+        <Setter Property="Shell.ForegroundColor"       Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="Shell.TitleColor"            Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="Shell.DisabledColor"         Value="{StaticResource AppTextSecondary}" />
+        <Setter Property="Shell.UnselectedColor"       Value="{StaticResource AppTextSecondary}" />
+        <Setter Property="Shell.NavBarHasShadow"       Value="False" />
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource AppSurface}" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource AppAccent}" />
+        <Setter Property="Shell.TabBarTitleColor"    Value="{StaticResource AppAccent}" />
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource AppTextSecondary}" />
+    </Style>
+
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource AppSurface}" />
+        <Setter Property="BarTextColor"       Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="IconColor"          Value="{StaticResource AppTextPrimary}" />
+    </Style>
+
+</ResourceDictionary>

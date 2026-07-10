@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MovieListApp.ViewModels"
+             xmlns:models="clr-namespace:MovieListApp.Models"
+             x:Class="MovieListApp.Views.MovieListPage"
+             x:DataType="vm:MovieListViewModel"
+             Title="{Binding PageTitle}">
+
+    <Grid>
+        <!-- Empty state -->
+        <VerticalStackLayout IsVisible="{Binding Movies.Count, Converter={StaticResource ZeroCountConverter}}"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="8">
+            <Label Text="This list is empty."
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource AppTextSecondary}"
+                   FontSize="16" />
+            <Label Text="Search for movies and add them here."
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource AppTextSecondary}"
+                   FontSize="13" />
+        </VerticalStackLayout>
+
+        <!-- Movie cards -->
+        <CollectionView ItemsSource="{Binding Movies}"
+                        SelectionMode="None"
+                        Margin="12,8,12,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:SavedMovie">
+                    <Border BackgroundColor="{StaticResource AppSurface}"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="0"
+                            Margin="0,5">
+                        <Grid ColumnDefinitions="84,*,Auto" Padding="8" ColumnSpacing="12">
+                            <Border Grid.Column="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="0"
+                                    HeightRequest="116"
+                                    WidthRequest="76">
+                                <Image Source="{Binding PosterOrPlaceholder}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="116"
+                                       WidthRequest="76" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1"
+                                                 VerticalOptions="Center"
+                                                 Spacing="5">
+                                <Label Text="{Binding Title}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding Year}"
+                                       FontSize="13"
+                                       TextColor="{StaticResource AppTextSecondary}" />
+                                <Border BackgroundColor="{StaticResource AppAccentMuted}"
+                                        StrokeShape="RoundRectangle 4"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="Start"
+                                        Padding="8,3">
+                                    <Label Text="{Binding RatingDisplay}"
+                                           FontSize="12"
+                                           TextColor="{StaticResource AppAccent}"
+                                           FontAttributes="Bold" />
+                                </Border>
+                                <Label Text="{Binding UserNote}"
+                                       FontSize="12"
+                                       TextColor="{StaticResource AppTextSecondary}"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2"
+                                       IsVisible="{Binding UserNote, Converter={StaticResource StringNotEmptyConverter}}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2"
+                                    Text="✕"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MovieListViewModel}}, Path=RemoveMovieCommand}"
+                                    CommandParameter="{Binding .}"
+                                    VerticalOptions="Center"
+                                    FontSize="14"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{StaticResource AppTextSecondary}"
+                                    BorderWidth="0"
+                                    Padding="8"
+                                    WidthRequest="40"
+                                    HeightRequest="40" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MovieListViewModel}}, Path=GoToDetailCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

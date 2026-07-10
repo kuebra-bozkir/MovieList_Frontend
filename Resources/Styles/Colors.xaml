@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- App semantic colors (always dark) -->
+    <Color x:Key="AppBackground">#141414</Color>
+    <Color x:Key="AppSurface">#1E1E1E</Color>
+    <Color x:Key="AppSurfaceHigh">#2A2A2A</Color>
+    <Color x:Key="AppAccent">#0F6FFF</Color>
+    <Color x:Key="AppAccentMuted">#0F6FFF44</Color>
+    <Color x:Key="AppTextPrimary">#FFFFFF</Color>
+    <Color x:Key="AppTextSecondary">#9E9E9E</Color>
+    <Color x:Key="AppDivider">#2A2A2A</Color>
+    <Color x:Key="AppError">#FF4C4C</Color>
+
+    <!-- Keep legacy keys so Styles.xaml AppThemeBinding references don't break -->
+    <Color x:Key="Primary">#0F6FFF</Color>
+    <Color x:Key="PrimaryDark">#0A4DC7</Color>
+    <Color x:Key="PrimaryDarkText">#FFFFFF</Color>
+    <Color x:Key="Secondary">#1E1E1E</Color>
+    <Color x:Key="SecondaryDarkText">#9E9E9E</Color>
+    <Color x:Key="Tertiary">#0A4DC7</Color>
+
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="Magenta">#0F6FFF</Color>
+    <Color x:Key="MidnightBlue">#141414</Color>
+    <Color x:Key="OffBlack">#1E1E1E</Color>
+
+    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray200">#C8C8C8</Color>
+    <Color x:Key="Gray300">#ACACAC</Color>
+    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="Gray500">#6E6E6E</Color>
+    <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#141414</Color>
+
+    <SolidColorBrush x:Key="PrimaryBrush"         Color="{StaticResource AppAccent}"/>
+    <SolidColorBrush x:Key="SecondaryBrush"        Color="{StaticResource AppSurface}"/>
+    <SolidColorBrush x:Key="TertiaryBrush"         Color="{StaticResource AppAccent}"/>
+    <SolidColorBrush x:Key="WhiteBrush"            Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="BlackBrush"            Color="{StaticResource Black}"/>
+    <SolidColorBrush x:Key="AppSurfaceBrush"       Color="{StaticResource AppSurface}"/>
+    <SolidColorBrush x:Key="AppSurfaceHighBrush"   Color="{StaticResource AppSurfaceHigh}"/>
+    <SolidColorBrush x:Key="AppDividerBrush"       Color="{StaticResource AppDivider}"/>
+    <SolidColorBrush x:Key="AppAccentBrush"        Color="{StaticResource AppAccent}"/>
+
+    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
+    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
+    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
+    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
+    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
+    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
+    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
+    <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+</ResourceDictionary>

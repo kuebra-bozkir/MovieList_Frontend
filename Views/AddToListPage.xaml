@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MovieListApp.ViewModels"
+             xmlns:models="clr-namespace:MovieListApp.Models"
+             x:Class="MovieListApp.Views.AddToListPage"
+             x:DataType="vm:AddToListViewModel"
+             Title="Add to List">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16,20" Spacing="20">
+
+            <!-- Movie title summary -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="{Binding Movie.Title}"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSansSemibold" />
+                <Label Text="{Binding Movie.Year}"
+                       FontSize="14"
+                       TextColor="{StaticResource AppTextSecondary}" />
+            </VerticalStackLayout>
+
+            <BoxView HeightRequest="1" />
+
+            <!-- Pick existing list -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="ADD TO LIST"
+                       Style="{StaticResource SectionLabel}" />
+                <Border BackgroundColor="{StaticResource AppSurface}"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0">
+                    <Picker Title="Select a list"
+                            ItemsSource="{Binding Lists}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedList}"
+                            Margin="12,0" />
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Create new list -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="OR CREATE NEW LIST"
+                       Style="{StaticResource SectionLabel}" />
+                <Border BackgroundColor="{StaticResource AppSurface}"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0">
+                    <Entry Placeholder="New list name..."
+                           Text="{Binding NewListName}"
+                           ClearButtonVisibility="WhileEditing"
+                           Margin="12,0" />
+                </Border>
+            </VerticalStackLayout>
+
+            <BoxView HeightRequest="1" />
+
+            <!-- Rating -->
+            <VerticalStackLayout Spacing="12">
+                <Label Text="YOUR RATING"
+                       Style="{StaticResource SectionLabel}" />
+                <Grid ColumnDefinitions="Auto,*,Auto"
+                      ColumnSpacing="16"
+                      VerticalOptions="Center">
+                    <Stepper Grid.Column="0"
+                             Minimum="1"
+                             Maximum="10"
+                             Increment="1"
+                             Value="{Binding UserRating}"
+                             VerticalOptions="Center" />
+                    <Label Grid.Column="1"
+                           Text="{Binding UserRating, StringFormat='{0} / 10'}"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource AppAccent}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Grid>
+            </VerticalStackLayout>
+
+            <!-- Opinion note -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="YOUR OPINION"
+                       Style="{StaticResource SectionLabel}" />
+                <Border BackgroundColor="{StaticResource AppSurface}"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        Padding="4">
+                    <Editor Placeholder="Write a short note about the movie..."
+                            Text="{Binding UserNote}"
+                            HeightRequest="110"
+                            AutoSize="TextChanges" />
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Error -->
+            <Label Text="{Binding StatusMessage}"
+                   IsVisible="{Binding StatusMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                   TextColor="{StaticResource AppError}"
+                   FontSize="13" />
+
+            <!-- Save -->
+            <Button Text="Save to List"
+                    Command="{Binding SaveCommand}"
+                    HorizontalOptions="Fill"
+                    Margin="0,4,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

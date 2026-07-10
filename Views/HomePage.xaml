@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MovieListApp.ViewModels"
+             xmlns:models="clr-namespace:MovieListApp.Models"
+             x:Class="MovieListApp.Views.HomePage"
+             x:DataType="vm:HomeViewModel"
+             Title="Browse">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Loading -->
+        <ActivityIndicator Grid.Row="0"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           Margin="0,20" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="0" Padding="0,4,0,32">
+
+                <Label Text="Browse Movies"
+                       Style="{StaticResource Headline}"
+                       Margin="16,16,16,20" />
+
+                <!-- Genre rows -->
+                <CollectionView ItemsSource="{Binding Genres}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:GenreSection">
+                            <VerticalStackLayout Spacing="10" Margin="0,0,0,28">
+
+                                <Label Text="{Binding Genre}"
+                                       Style="{StaticResource SubHeadline}"
+                                       Margin="16,0" />
+
+                                <CollectionView ItemsSource="{Binding Movies}"
+                                               SelectionMode="None"
+                                               HeightRequest="210">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.Header>
+                                        <BoxView WidthRequest="16" HeightRequest="1" Color="Transparent" />
+                                    </CollectionView.Header>
+                                    <CollectionView.Footer>
+                                        <BoxView WidthRequest="16" HeightRequest="1" Color="Transparent" />
+                                    </CollectionView.Footer>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:MovieDetail">
+                                            <VerticalStackLayout WidthRequest="120" Spacing="6">
+                                                <Border StrokeShape="RoundRectangle 8"
+                                                        StrokeThickness="0"
+                                                        HeightRequest="162"
+                                                        WidthRequest="110">
+                                                    <Image Source="{Binding PosterOrPlaceholder}"
+                                                           Aspect="AspectFill"
+                                                           HeightRequest="162"
+                                                           WidthRequest="110" />
+                                                </Border>
+                                                <Label Text="{Binding Title}"
+                                                       FontSize="12"
+                                                       TextColor="{StaticResource AppTextSecondary}"
+                                                       LineBreakMode="TailTruncation"
+                                                       MaxLines="2"
+                                                       WidthRequest="110" />
+                                                <VerticalStackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=GoToDetailCommand}"
+                                                        CommandParameter="{Binding .}" />
+                                                </VerticalStackLayout.GestureRecognizers>
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

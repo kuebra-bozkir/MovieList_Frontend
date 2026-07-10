@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MovieListApp.ViewModels"
+             xmlns:models="clr-namespace:MovieListApp.Models"
+             x:Class="MovieListApp.Views.SearchPage"
+             x:DataType="vm:SearchViewModel"
+             Title="Search">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <!-- Search bar -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource AppSurface}"
+                StrokeShape="RoundRectangle 12"
+                StrokeThickness="0"
+                Margin="16,16,16,8">
+            <Grid ColumnDefinitions="*,Auto">
+                <SearchBar Grid.Column="0"
+                           Placeholder="Search movies..."
+                           Text="{Binding Query}"
+                           SearchCommand="{Binding SearchCommand}"
+                           BackgroundColor="Transparent"
+                           Margin="0" />
+                <ActivityIndicator Grid.Column="1"
+                                   IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}"
+                                   VerticalOptions="Center"
+                                   Margin="0,0,12,0" />
+            </Grid>
+        </Border>
+
+        <!-- Status / error -->
+        <Label Grid.Row="1"
+               Text="{Binding StatusMessage}"
+               IsVisible="{Binding StatusMessage, Converter={StaticResource StringNotEmptyConverter}}"
+               TextColor="{StaticResource AppTextSecondary}"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               FontSize="14"
+               Margin="24,20" />
+
+        <!-- Results -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Results}"
+                        IsVisible="{Binding StatusMessage, Converter={StaticResource StringEmptyConverter}}"
+                        SelectionMode="None"
+                        Margin="12,4,12,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:SearchResult">
+                    <Border BackgroundColor="{StaticResource AppSurface}"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="0"
+                            Margin="0,5">
+                        <Grid ColumnDefinitions="84,*" Padding="8" ColumnSpacing="12">
+                            <Border Grid.Column="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="0"
+                                    HeightRequest="116"
+                                    WidthRequest="76">
+                                <Image Source="{Binding PosterOrPlaceholder}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="116"
+                                       WidthRequest="76" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1"
+                                                 VerticalOptions="Center"
+                                                 Spacing="5">
+                                <Label Text="{Binding Title}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding Year}"
+                                       FontSize="13"
+                                       TextColor="{StaticResource AppTextSecondary}" />
+                                <Border BackgroundColor="{StaticResource AppSurfaceHigh}"
+                                        StrokeShape="RoundRectangle 4"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="Start"
+                                        Padding="8,3">
+                                    <Label Text="{Binding Type}"
+                                           FontSize="11"
+                                           TextColor="{StaticResource AppTextSecondary}"
+                                           TextTransform="Uppercase" />
+                                </Border>
+                            </VerticalStackLayout>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchViewModel}}, Path=GoToDetailCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
