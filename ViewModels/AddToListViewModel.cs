@@ -38,6 +38,12 @@ public partial class AddToListViewModel : BaseViewModel
         _listsVm = listsVm;
     }
 
+    public async Task LoadAndResetAsync()
+    {
+        await _listsVm.LoadAsync();
+        Reset();
+    }
+
     public void Reset()
     {
         SelectedList = Lists.Count > 0 ? Lists[0] : null;

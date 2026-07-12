@@ -13,9 +13,9 @@ public partial class AddToListPage : ContentPage
         _vm = vm;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        _vm.Reset();
+        await _vm.LoadAndResetAsync();
     }
 }

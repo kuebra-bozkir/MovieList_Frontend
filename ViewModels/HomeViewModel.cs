@@ -23,7 +23,6 @@ public partial class HomeViewModel : BaseViewModel
     public async Task LoadAsync()
     {
         if (_loaded) return;
-        _loaded = true;
 
         IsBusy = true;
         try
@@ -37,6 +36,7 @@ public partial class HomeViewModel : BaseViewModel
             });
 
             await Task.WhenAll(tasks);
+            _loaded = true;
         }
         finally
         {

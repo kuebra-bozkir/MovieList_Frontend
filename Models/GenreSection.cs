@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using MovieListApp.Models;
 
 namespace MovieListApp.Models;
 
